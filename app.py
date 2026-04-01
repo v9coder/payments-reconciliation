@@ -1,11 +1,14 @@
-from __future__ import annotations
-
+import os
 from pathlib import Path
 
 import pandas as pd
 import streamlit as st
 
+from src.generate_data import generate_data
 from src.reconcile import reconcile
+
+if not os.path.exists("data/transactions.csv") or not os.path.exists("data/settlements.csv"):
+    generate_data()
 
 
 ROOT = Path(__file__).resolve().parent
@@ -62,9 +65,7 @@ def _ensure_data() -> None:
 
     st.warning("CSV data not found. Generate sample data to continue.")
     if st.button("Generate sample January 2025 data"):
-        from src.generate_data import main as generate_main
-
-        generate_main()
+        generate_data()
         st.success("Data generated. Re-run is not required; the app will load it now.")
         st.rerun()
 

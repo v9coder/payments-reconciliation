@@ -149,6 +149,11 @@ def main() -> None:
     print(f"Wrote {len(settlements)} settlements to {data_dir / 'settlements.csv'}")
 
 
+def generate_data() -> None:
+    """Public helper for app bootstrap/fresh deployments."""
+    main()
+
+
 if __name__ == "__main__":
     main()
 
