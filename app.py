@@ -219,6 +219,7 @@ def main() -> None:
     cols = st.columns(5)
     for i, gt in enumerate(gap_types):
         row = summary_df[summary_df["gap_type"] == gt].iloc[0]
+        subtitle_text = "(double-counted)" if gt == "DUPLICATE" else "\u00a0"
         with cols[i]:
             st.markdown(
                 f"""
@@ -232,7 +233,7 @@ def main() -> None:
                     <div class="metric-block right">
                       <div class="k">Total $ impact</div>
                       <div class="v">{_format_money(row["impact"])}</div>
-                      {"<div class='sub'>(double-counted)</div>" if gt == "DUPLICATE" else ""}
+                      <div class="sub">{subtitle_text}</div>
                     </div>
                   </div>
                 </div>
